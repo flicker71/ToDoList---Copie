@@ -26,7 +26,7 @@ export function Form() {
     const year = newDate.getFullYear();
     return (`${year}-${month < 10 ? `0${month}` : month}-${date}`);
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // this.setNewTodos({
@@ -65,6 +65,7 @@ export function Form() {
   //     console.log('id' + id);
   //     return id
   // }
+  // test pour le husky et le git commit
 
   return (
     <form onSubmit={handleSubmit}>

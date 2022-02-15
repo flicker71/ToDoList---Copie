@@ -5,7 +5,8 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "yarn run eslint . --ext .jsx,.js"
   },
   "dependencies": {
     "husky": "^7.0.4",
