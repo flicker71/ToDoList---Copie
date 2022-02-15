@@ -66,7 +66,7 @@ export function Form() {
   //     return id
   // }
   // test pour le husky et le git commit
-  // Test pour le workflow
+  // Test pour le workflow v2
 
   return (
     <form onSubmit={handleSubmit}>
