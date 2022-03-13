@@ -13,7 +13,8 @@
     "husky": "^7.0.4",
     "react": "^17.0.0",
     "react-date-object": "^2.1.5",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.0",

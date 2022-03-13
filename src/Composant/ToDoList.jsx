@@ -1,18 +1,14 @@
-import React, { Component } from 'react';
+import React from "react";
+import Todo from "./Todo";
 
-class TodoList extends Component {
-  render() {
+const TodoList = ({ todos, toogleComplete, removeTodo}) => {
     return (
-      <div className="todoListMain">
-        <div className="header">
-          <form>
-            <input placeholder="enter task" />
-            <button type="submit">add</button>
-          </form>
-        </div>
-      </div>
-    );
-  }
+        <ul> 
+            {todos.map(todo => (
+                <Todo key={todo.id} todo={todo} toogleComplete={toogleComplete} removeTodo={removeTodo}/>
+            ))}
+        </ul>
+    )
 }
 
-export default TodoList;
+export default TodoList
