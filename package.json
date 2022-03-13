@@ -9,6 +9,7 @@
     "lint": "yarn run eslint . --ext .jsx,.js"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
     "husky": "^7.0.4",
     "react": "^17.0.0",
     "react-date-object": "^2.1.5",

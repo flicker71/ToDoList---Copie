@@ -1,23 +1,65 @@
 import { useState } from 'react';
+// import Dialog from "@material-ui/core/Dialog";
+// import DialogContentText from "@material-ui/core/DialogContentText";
+// import DialogTitle from "@material-ui/core/DialogTitle";
+// import DialogActions from "@material-ui/core/DialogActions";
+// import DialogContent from "@material-ui/core/DialogContent";
+// import Button from "@material-ui/core/Button";
+import { useEffect } from 'react';
+
+
+const LOCAL_STORAGE_KEY = "ToDoList-todos"
 
 export function Form() {
+
+  const [open, setOpen] = useState(false);
   const [labels, setLabels] = useState([{ titleLabel: 'label', color: '#FFFFFF' }]);
-  const [newLabel, setNewLabels] = useState([{ titleLabel: '', color: '' }]);
+  // const [newLabel, setNewLabels] = useState([{ titleLabel: '', color: '' }]);
   const [todos, setTodos] = useState([{
-    id: '1', title: 'foo', completed: true, description: 'bar',
+    id: '1', 
+    title: 'foo', 
+    completed: true, 
+    description: 'bar',
   }]);
-  const [newTodo, setNewTodos] = useState([{ title: '', completed: false, description: '' }]);
+  const [newTodo, setNewTodos] = useState([{ title: '', 
+  completed: false, 
+  description: '' }]);
+
+  useEffect(() => {
+    const storageTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (storageTodos) {
+      setTodos(storageTodos);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
+  }, [todos]);
 
   const handleChange = (e) => {
     setNewTodos({ ...newTodo, [e.target.name]: e.target.value });
   };
 
-  const handleChangeLabel = (e) => {
-    setNewLabels({ ...newLabel, [e.target.name]: e.target.value });
-  };
+  // const handleChangeLabel = (e) => {
+  //   setNewLabels({ ...newLabel, [e.target.name]: e.target.value });
+  // };
+
   // const handleEdit = (e) => {
-    //     setTodos([...todos, { [e.target.name]: e.target.value }])
-    // }
+  //   setTodos([...todos, { [e.target.name]: e.target.value }])
+  // }
+
+  // const handleTodoCompleted = (id) => {
+  //   setTodos(
+  //     todos.map(todo => {
+  //       if (todo.id === id) {
+  //         return {
+  //           ...todo,
+  //           completed: !todo.completed
+  //         }
+  //       }
+  //     }
+  //     ));
+  // }
 
   const getCurrentDate = () => {
     const newDate = new Date();
@@ -29,44 +71,18 @@ export function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // this.setNewTodos({
-    //    title: '', description: '', dueDate: '', ...newTodo, [e.target.name]: e.target.value
-    // })
     { newTodo.createDate = getCurrentDate(); }
     setTodos([...todos, newTodo]);
     setLabels([...labels, newLabel]);
   };
 
-  // const deleteTodo = (event) => {
-  //     event.preventDefault();F
-  //     const array = setTodos;
-  //     const index = array.indexOf(event.target.value);
-  //     array.splice(index, 1);
-  //     setTodos([...todos, array]);
-  // }
+  // const handleClickToOpen = () => {
+  //   setOpen(true);
+  // };
 
-  // const toggleChangeCompleted = (completed) => {
-  // setTodos(completed, !completed); ??
-  //     completed = !completed;
-  //     return !completed;
-  // Ne convient pas, il faut choisir la ToDo à modifier pour faire un setTodos et appliquer la modif.
-  // Faire l'edit d'une todo afin de débloquer mon problème.
-  // }
-
-  // const getId = () => {
-  //     let id = 0;
-  //     console.log('todo' + todos.length);
-  //     for (const element of todos) {
-  //         console.log('element' + element.id);
-  //         if (todos.length === element.id) {
-  //             id = element.id + 1;
-  //         }
-  //     }
-  //     console.log('id' + id);
-  //     return id
-  // }
-  // test pour le husky et le git commit
-  // Test pour le workflow v2
+  // const handleToClose = () => {
+  //   setOpen(false);
+  // };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -77,7 +93,7 @@ export function Form() {
         <input type="text" name="id" disabled value={newTodo.id = Date.now()} onChange={handleChange} />
       </label>
       {' '}
-      <label>
+      {/* <label>
         Label :
         {' '}
         <input type="text" name="titleLabel" value={newLabel.titleLabel} placeholder="un label" onChange={handleChangeLabel} />
@@ -86,8 +102,7 @@ export function Form() {
         Choix couleur :
         {' '}
         <input type="color" name="color" value={newLabel.color} onChange={handleChangeLabel} />
-      </label>
-      {' '}
+      </label> */}
       <br />
       <label>
         Titre :
@@ -108,6 +123,7 @@ export function Form() {
       </label>
 
       <button type="submit">Add</button>
+      <br></br>
 
       <select name="Status" id="Status-select">
         <option value="">Choisit un filtre</option>
@@ -118,29 +134,30 @@ export function Form() {
 
       <ul>
         {/* {labels.map(labels = <li> {labels.titleLabel}, {labels.color}</li>)} */}
-        {todos.map((todos) => (
-          <li style={todos.completed ? { textDecoration: 'line-through' } : {}}>
+        {todos.map((todo) => (
+          <li style={todo.completed ? { textDecoration: 'line-through' } : {}}>
+            {/* <input type="checkbox" checked={todo.completed} onChange={handleTodoCompleted} /> */}
             {' '}
             <b>id :</b>
             {' '}
-            {todos.id}
+            {todo.id}
             ,
             {' '}
             <b>Date de création :</b>
             {' '}
-            {todos.createDate}
+            {todo.createDate}
             ,
             {' '}
             <b>title :</b>
             {' '}
-            {todos.title}
+            {todo.title}
             ,
             {' '}
             <b>description : </b>
-            {todos.description}
+            {todo.description}
             ,
             <b> Date de fin : </b>
-            {todos.dueDate}
+            {todo.dueDate}
             {' '}
           </li>
         ))}
@@ -149,3 +166,36 @@ export function Form() {
     </form>
   );
 }
+
+      // <div>
+      //   <Dialog open={open} onClose={handleToClose}>
+      //     <DialogTitle>{"Edit your todo"}</DialogTitle>
+      //     <DialogContent>
+      //       {/* <input type="checkbox" checked="todo.completed" onChange={}/> */}
+      //       <label>
+      //         Titre :
+      //         {' '}
+      //         <input type="text" name="editTitle" value={newTodo.title} placeholder={todos.title} onChange={handleChange} />
+      //       </label>
+      //       {' '}
+      //       <label>
+      //         Description :
+      //         {' '}
+      //         <input type="text" name="editDescription" value={newTodo.description} placeholder="une description" onChange={handleChange} />
+      //       </label>
+      //       {' '}
+      //       <label>
+      //         Date de fin :
+      //         {' '}
+      //         <input type="date" name="editDueDate" value={newTodo.dueDate} onChange={handleChange} />
+      //       </label>
+
+      //     </DialogContent>
+      //     <DialogActions>
+      //       <Button onClick={handleToClose}
+      //         color="primary" autoFocus>
+      //         Close
+      //       </Button>
+      //     </DialogActions>
+      //   </Dialog>
+      // </div>
