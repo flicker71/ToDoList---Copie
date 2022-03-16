@@ -1,11 +1,13 @@
 import React from "react";
 import Todo from "./Todo";
 
-const TodoList = ({ todos, toogleComplete, removeTodo}) => {
+const TodoList = ({ todos, toogleComplete, removeTodo, updateTodo }) => {
+
+    // const { todos } = props
     return (
-        <ul> 
+        <ul>
             {todos.map(todo => (
-                <Todo key={todo.id} todo={todo} toogleComplete={toogleComplete} removeTodo={removeTodo}/>
+                <Todo key={todo.id} todo={todo} toogleComplete={toogleComplete} removeTodo={removeTodo} updateTodo={updateTodo} />
             ))}
         </ul>
     )
