@@ -9,6 +9,11 @@ import axios from 'axios';
 function App() {
 
   const [todos, setTodos] = useState([]);
+  const [editedTodo, setEditedTodo] = useState({
+    title: '',
+    completed: false,
+    description: ''
+  });
 
   const apiUrl = 'http://localhost:3080/api/todos/';
 
@@ -56,24 +61,42 @@ function App() {
     setTodos(todos.filter(todo => todo.id !== id));
   }
 
-  const updateTodo = (id) => {
-    todos.map(todo => {
-      if (todo.id === id) {
-        axios.put(apiUrl + `${id}`, {
-          title: todo.title,
-          description: todo.description,
-          dueDate: todo.dueDate,
-        })
-      }
-    })
+  const updateTodo = (todo, id) => {
+    setTodos(todos.filter(todo => todo.id === id));
+      axios.put(apiUrl + `${id}`, {
+        title: todo.title,
+        description: todo.description,
+        dueDate: todo.dueDate,
+      });
+    
   }
 
+  const handleFormSubmit = (todo) => {
+
+     if (!todo.id) {
+      addTodo({ ...todo });
+    }
+    else {
+      updateTodo({ ...todo }, todo.id);
+    }
+
+    setEditedTodo({
+      title: '',
+      completed: false,
+      description: ''
+    })
+    //   return todo
+    // }
+    // else {
+    //   return null
+    // }
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <TodoForm todos={todos} addTodo={addTodo} />
-        <TodoList todos={todos} toogleComplete={toogleComplete} removeTodo={removeTodo} updateTodo={updateTodo} />
+        <TodoForm onSubmit={handleFormSubmit} editedTodo={editedTodo} />
+        <TodoList todos={todos} toogleComplete={toogleComplete} removeTodo={removeTodo} updateTodo={updateTodo}/>
       </header>
     </div>
   );

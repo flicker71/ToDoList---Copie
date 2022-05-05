@@ -1,22 +1,8 @@
 import React, { useState } from "react";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import Button from "@material-ui/core/Button";
-import axios from "axios";
 
 const Todo = ({ todo, toogleComplete, removeTodo, updateTodo }) => {
 
     const [open, setOpen] = useState(false);
-    const [input, setInput] = useState('');
-
-    const [newTodo, setNewTodos] = useState([{
-        title: '',
-        description: '',
-        dueDate: '',
-    }]);
 
     const handleCheckBoxClick = () => {
         toogleComplete(todo.id);
@@ -26,23 +12,11 @@ const Todo = ({ todo, toogleComplete, removeTodo, updateTodo }) => {
         removeTodo(todo.id);
     }
 
-    const handleClickToOpen = () => {
-        setOpen(true);
-    };
-
-    const handleToClose = () => {
-        setOpen(false);
-    };
-
-    const handleUpdateTodo = () => {
-        updateTodo(todo.id)
-        setOpen(false)
-        window.location.reload();  
+    const handleEditTodo = () => {
+        // editedTodoForm = true;
+        // updateTodo(todo.id)
+        updateTodo(todo, todo.id);
     }
-
-    const handleChange = (e) => {
-        setNewTodos({ ...newTodo, [e.target.name]: e.target.value });
-    };
 
     return (
         <div>
@@ -60,9 +34,9 @@ const Todo = ({ todo, toogleComplete, removeTodo, updateTodo }) => {
                 {todo.dueDate}
             </li>
             <button onClick={handleRemoveTodo}> X </button>
-            <button onClick={handleClickToOpen}> Edit </button>
+            <button onClick={handleEditTodo}> Edit </button>
 
-            <Dialog maxWidth='lg' open={open} onClose={handleToClose}>
+            {/* <Dialog maxWidth='lg' open={open} onClose={handleToClose}>
                 <DialogTitle>{"Edit your todo"}</DialogTitle>
                 <DialogContentText>
                     <label>
@@ -93,7 +67,7 @@ const Todo = ({ todo, toogleComplete, removeTodo, updateTodo }) => {
                         Close
                     </Button>
                 </DialogActions>
-            </Dialog>
+            </Dialog> */}
         </div>
     );
 }
