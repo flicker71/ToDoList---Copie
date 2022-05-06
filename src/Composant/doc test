@@ -1,0 +1,153 @@
+// import { useState } from 'react';
+// import { useEffect } from 'react';
+
+// function TodoForm({ updateTodo, addTodo, editedTodo = {
+//   title: '',
+//   completed: false,
+//   description: ''
+// } }) {
+
+//   const [editTodo, setEditTodo] = useState({});
+
+//   useEffect(() => setEditTodo(editedTodo), [editedTodo])
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     { editTodo.createDate = getCurrentDate(); }
+
+//     // if (editTodo.id === null) {
+//       addTodo({ ...editTodo });
+//     // }
+//     // else {
+//       // updateTodo({ ...editTodo }, editedTodo.id);
+//     // }
+//   };
+
+//   const handleChange = (e) => {
+//     setEditTodo({ ...editTodo, [e.target.name]: e.target.value });
+//   };
+
+
+//   const getCurrentDate = () => {
+//     const newDate = new Date();
+//     const date = newDate.getDate();
+//     const month = newDate.getMonth() + 1;
+//     const year = newDate.getFullYear();
+//     return (`${year}-${month < 10 ? `0${month}` : month}-${date}`);
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+
+//       <label>
+//         Titre :
+//         {' '}
+//         <input type="text" name="title" value={editTodo.title} placeholder="un titre" onChange={handleChange} />
+//       </label>
+//       {' '}
+//       <label>
+//         Description :
+//         {' '}
+//         <input type="text" name="description" value={editTodo.description} placeholder="une description" onChange={handleChange} />
+//       </label>
+//       {' '}
+//       <label>
+//         Date de fin :
+//         {' '}
+//         <input type="date" name="dueDate" value={editTodo.dueDate} onChange={handleChange} />
+//       </label>
+
+//       <button type="submit">Add</button>
+//       <br></br>
+
+//       <select name="Status" id="Status-select">
+//         <option value="">Choisit un filtre</option>
+//         <option value="all">All</option>
+//         <option value="completed">Completed</option>
+//         <option value="uncompleted">Uncompleted</option>
+//       </select>
+//     </form>
+//   )
+// }
+
+// export default TodoForm;
+
+
+
+
+
+
+
+// import React, { useState } from "react";
+
+// const Todo = ({ todo, toogleComplete, removeTodo, editedTodo }) => {
+
+//     const [open, setOpen] = useState(false);
+
+//     const handleCheckBoxClick = () => {
+//         toogleComplete(todo.id);
+//     }
+
+//     const handleRemoveTodo = () => {
+//         removeTodo(todo.id);
+//     }
+
+//     const handleEditTodo = () => {
+//         editedTodo(todo.id);
+//     }
+
+//     return (
+//         <div>
+//             <li style={todo.completed ? { textDecoration: 'line-through' } : {}}>
+//                 <input type="checkbox" checked={todo.completed} onClick={handleCheckBoxClick} />
+//                 <b>{' '} id : {' '}</b>
+//                 {todo.id}
+//                 <b>{' '} tâche à faire : {' '}</b>
+//                 {todo.title}
+//                 <b>{' '} description :{' '}</b>
+//                 {todo.description}
+//                 <b>{' '} Crée le : {' '}</b>
+//                 {todo.createDate}
+//                 <b>{' '} à faire pour le : {' '}</b>
+//                 {todo.dueDate}
+//             </li>
+//             <button onClick={handleRemoveTodo}> X </button>
+//             <button onClick={handleEditTodo}> Edit </button>
+
+//             {/* <Dialog maxWidth='lg' open={open} onClose={handleToClose}>
+//                 <DialogTitle>{"Edit your todo"}</DialogTitle>
+//                 <DialogContentText>
+//                     <label>
+//                         Titre :
+//                         {' '}
+//                         <input type="text" name="editTitle" value={newTodo.title} placeholder={todo.title} onChange={handleChange} />
+//                     </label>
+//                     <br></br>
+//                     <label>
+//                         Description :
+//                         {' '}
+//                         <input type="text" name="editDescription" value={newTodo.description} placeholder={todo.description} onChange={handleChange} />
+//                     </label>
+//                     <br></br>
+//                     <label>
+//                         Date de fin :
+//                         {' '}
+//                         <input type="date" name="editDueDate" value={newTodo.dueDate} placeholder={todo.dueDate} onChange={handleChange} />
+//                     </label>
+//                 </DialogContentText>
+//                 <DialogActions>
+//                     <Button onClick={handleUpdateTodo}
+//                         color="primary" autoFocus>
+//                         Save
+//                     </Button>
+//                     <Button onClick={handleToClose}
+//                         color="primary" autoFocus>
+//                         Close
+//                     </Button>
+//                 </DialogActions>
+//             </Dialog> */}
+//         </div>
+//     );
+// }
+
+// export default Todo;

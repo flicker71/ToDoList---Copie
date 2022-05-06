@@ -31,6 +31,9 @@ function App() {
       description: todo.description,
       dueDate: todo.dueDate,
     })
+    //Je ne sais pas comment actualiser l'id directement, 
+    //ça pose problème pour delete une todo que l'on vient de créer car il ne trouve pas l'id avant l'actualisation
+    setTodos([...todos, todo]);
   }
 
   const toogleComplete = (id) => {
@@ -57,7 +60,7 @@ function App() {
   const removeTodo = (id) => {
     //axios pour le changement dans le back
     axios.delete(apiUrl + `${id}`);
-    //setTodos pour le changement dans le front (on peut faire un refresh btw)
+    //setTodos pour le changement dans le front
     setTodos(todos.filter(todo => todo.id !== id));
   }
 
@@ -96,7 +99,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <TodoForm onSubmit={handleFormSubmit} editedTodo={editedTodo} />
-        <TodoList todos={todos} toogleComplete={toogleComplete} removeTodo={removeTodo} updateTodo={updateTodo}/>
+        <TodoList todos={todos} toogleComplete={toogleComplete} removeTodo={removeTodo}/>
       </header>
     </div>
   );

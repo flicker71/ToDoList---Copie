@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import TodoForm from "./TodoForm";
 
-const Todo = ({ todo, toogleComplete, removeTodo, updateTodo }) => {
+const Todo = ({ todo, toogleComplete, removeTodo }) => {
 
     const [open, setOpen] = useState(false);
 
@@ -15,11 +16,14 @@ const Todo = ({ todo, toogleComplete, removeTodo, updateTodo }) => {
     const handleEditTodo = () => {
         // editedTodoForm = true;
         // updateTodo(todo.id)
-        updateTodo(todo, todo.id);
+        const isEditing = true;
+        <TodoForm editedTodo={todo.id}></TodoForm>
+        // updateTodo(todo, todo.id);
     }
+    
 
     return (
-        <div>
+        <div >
             <li style={todo.completed ? { textDecoration: 'line-through' } : {}}>
                 <input type="checkbox" checked={todo.completed} onClick={handleCheckBoxClick} />
                 <b>{' '} id : {' '}</b>

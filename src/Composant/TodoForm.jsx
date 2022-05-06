@@ -4,13 +4,11 @@ import { useEffect } from 'react';
 function TodoForm({ onSubmit, editedTodo }) {
 
   const [editTodo, setEditTodo] = useState({});
-  const [toggleSubmit, setToggleSubmit] = useState(true);
 
   useEffect(() => setEditTodo(editedTodo), [editedTodo])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // addTodo({ ...editTodo});   
     onSubmit(editTodo);
   };
 
@@ -49,13 +47,6 @@ function TodoForm({ onSubmit, editedTodo }) {
  
       <button type="submit">Add</button>
       <br></br>
-
-      <select name="Status" id="Status-select">
-        <option value="">Choisit un filtre</option>
-        <option value="all">All</option>
-        <option value="completed">Completed</option>
-        <option value="uncompleted">Uncompleted</option>
-      </select>
     </form>
   )
 }
