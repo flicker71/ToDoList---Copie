@@ -12,7 +12,8 @@ function App() {
   const [editedTodo, setEditedTodo] = useState({
     title: '',
     completed: false,
-    description: ''
+    description: '',
+    dueDate: ''
   });
 
   //route principal pour accéder à mon api
@@ -33,9 +34,12 @@ function App() {
       description: todo.description,
       dueDate: todo.dueDate,
     })
-    //Je ne sais pas comment actualiser l'id directement, 
-    //ça pose problème pour delete une todo que l'on vient de créer car il ne trouve pas l'id avant l'actualisation
-    setTodos([...todos, todo]);
+    //Permet de rajouter la todo avec un id et la date de création, sans le timeOut, ça ne fonctionne pas
+    setTimeout(() => {
+      axios.get(apiUrl).then((resp) => {
+        const allTodos = resp.data;
+        setTodos(allTodos)
+    }), 0});
   }
 
   //Permet de mettre à jour le status de la todo
@@ -93,7 +97,8 @@ function App() {
     setEditedTodo({
       title: '',
       completed: false,
-      description: ''
+      description: '',
+      dueDate: ''
     })
   }
 

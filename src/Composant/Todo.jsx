@@ -46,13 +46,13 @@ const Todo = ({ todo, toogleComplete, removeTodo }) => {
             <li style={todo.completed ? { textDecoration: 'line-through' } : {}}>
                 <input type="checkbox" checked={todo.completed} onClick={handleCheckBoxClick} />
                 <b>{' '} id : {' '}</b>
-                {todo.id}
+                {todo.id}, |
                 <b>{' '} tâche à faire : {' '}</b>
-                {todo.title}
+                {todo.title}, |
                 <b>{' '} description :{' '}</b>
-                {todo.description}
+                {todo.description}, |
                 <b>{' '} Crée le : {' '}</b>
-                {todo.createDate}
+                {todo.created_at}, |
                 <b>{' '} à faire pour le : {' '}</b>
                 {todo.dueDate}
             </li>
