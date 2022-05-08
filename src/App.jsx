@@ -15,8 +15,10 @@ function App() {
     description: ''
   });
 
+  //route principal pour accéder à mon api
   const apiUrl = 'http://localhost:3080/api/todos/';
 
+  //Permet de récupérer mes todos présent dans ma bdd
   useEffect(() => {
     axios.get(apiUrl).then((resp) => {
       const allTodos = resp.data;
@@ -24,7 +26,7 @@ function App() {
     });
   }, []);
 
-
+  //Permet d'ajouter une todo
   const addTodo = (todo) => {
     axios.post(apiUrl, {
       title: todo.title,
@@ -36,6 +38,7 @@ function App() {
     setTodos([...todos, todo]);
   }
 
+  //Permet de mettre à jour le status de la todo
   const toogleComplete = (id) => {
     todos.map(todo => {
       if (todo.id === id) {
@@ -57,6 +60,7 @@ function App() {
     })
   }
 
+  //Permet de supprimer une todo
   const removeTodo = (id) => {
     //axios pour le changement dans le back
     axios.delete(apiUrl + `${id}`);
@@ -64,6 +68,7 @@ function App() {
     setTodos(todos.filter(todo => todo.id !== id));
   }
 
+  //appel de la route pour modifier une todo
   const updateTodo = (todo, id) => {
     setTodos(todos.filter(todo => todo.id === id));
       axios.put(apiUrl + `${id}`, {
@@ -74,6 +79,7 @@ function App() {
     
   }
 
+  //Utiliser pour ajouter ou modifier une todo, si l'objet todo envoyé n'a pas d'id alors c'est un ajout sinon c'est un edit
   const handleFormSubmit = (todo) => {
 
      if (!todo.id) {
@@ -83,16 +89,12 @@ function App() {
       updateTodo({ ...todo }, todo.id);
     }
 
+    //Remet les inputs avec des chamsp vident
     setEditedTodo({
       title: '',
       completed: false,
       description: ''
     })
-    //   return todo
-    // }
-    // else {
-    //   return null
-    // }
   }
 
   return (

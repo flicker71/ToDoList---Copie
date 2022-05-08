@@ -9,7 +9,7 @@
     "lint": "yarn run eslint . --ext .jsx,.js"
   },
   "dependencies": {
-    "@material-ui/core": "^4.12.3",
+    "@material-ui/core": "^4.12.4",
     "axios": "^0.26.1",
     "express": "^4.17.3",
     "husky": "^7.0.4",
