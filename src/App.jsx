@@ -36,7 +36,7 @@ function App() {
       axios.get(apiUrl).then((resp) => {
         const allTodos = resp.data;
         setTodos(allTodos);
-      }), 0;
+      }), 1000;
     });
   };
 
